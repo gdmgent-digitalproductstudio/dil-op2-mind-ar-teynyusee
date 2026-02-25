@@ -1,65 +1,40 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-  const target = document.querySelector("#paulTarget");
-  const paul = document.querySelector("#paulLayer");
-  const mist = document.querySelector("#mist");
-  const quote = document.querySelector("#prophecyQuote");
+const target = document.querySelector("#paulTarget");
+const paul = document.querySelector("#paul");
+const mist = document.querySelector("#mist");
 
-  let state = 0;
-  let float = 0;
+let running=false;
+let t=0;
+let z=0;
 
-  /* TARGET FOUND */
-  target.addEventListener("targetFound", () => {
-    subtleFloat();
-  });
+target.addEventListener("targetFound",()=>{
+running=true;
 
-  /* TARGET LOST */
-  target.addEventListener("targetLost", () => {
-    reset();
-  });
+mist.setAttribute("animation",{
+property:"material.opacity",
+to:0.1,
+dur:1200
+});
 
-  /* TAP INTERACTION */
-  document.body.addEventListener("click", () => {
-    state++;
-    if (state > 2) state = 1;
-    updateState();
-  });
+animateDepth();
+});
 
-  /* FLOATING PARALLAX */
-  function subtleFloat() {
-    setInterval(() => {
-      float += 0.02;
-      const y = Math.sin(float) * 0.03;
-      paul.setAttribute("position", `0 ${y} 0.15`);
-    }, 30);
-  }
+target.addEventListener("targetLost",()=>{
+running=false;
+mist.setAttribute("material","opacity",0);
+});
 
-  /* STATE SYSTEM */
-  function updateState() {
+function animateDepth(){
+if(!running)return;
 
-    if (state === 1) {
-      mist.setAttribute("material", "opacity", 0.12);
-    }
+t+=0.002;
+const targetZ=Math.sin(t)*0.02;
+z+=(targetZ-z)*0.04;
 
-    if (state === 2) {
-      mist.setAttribute("material", "opacity", 0.22);
-      quote.setAttribute("opacity", 1);
-      paul.setAttribute("animation", {
-        property: "scale",
-        to: "1.05 1.05 1.05",
-        dur: 800,
-        dir: "alternate",
-        loop: true
-      });
-    }
-  }
+paul.setAttribute("position",`0 0.02 ${0.18+z}`);
 
-  function reset() {
-    state = 0;
-    mist.setAttribute("material", "opacity", 0);
-    quote.setAttribute("opacity", 0);
-    paul.removeAttribute("animation");
-    paul.setAttribute("scale", "1 1 1");
-  }
+requestAnimationFrame(animateDepth);
+}
 
 });
