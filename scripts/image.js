@@ -1,101 +1,72 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-  // PAUL
   const paulTarget = document.querySelector("#paulTarget");
+
+  const layer1 = document.querySelector("#layer1");
+  const layer2 = document.querySelector("#layer2");
+  const layer3 = document.querySelector("#layer3");
+
   const leftGlow = document.querySelector("#leftGlow");
   const rightGlow = document.querySelector("#rightGlow");
-  const leftLight = document.querySelector("#leftLight");
-  const rightLight = document.querySelector("#rightLight");
+
   const mist = document.querySelector("#mist");
+  const quote = document.querySelector("#prophecyQuote");
 
-  // ENSEMBLE
-  const ensembleTarget = document.querySelector("#ensembleTarget");
-  const prophecyText = document.querySelector("#prophecyText");
-
-  // LOGO
-  const logoTarget = document.querySelector("#logoTarget");
-  const fearText = document.querySelector("#fearText");
-
-  // SANDWORM
-  const wormTarget = document.querySelector("#wormTarget");
-  const wormRing = document.querySelector("#wormRing");
-
-  let powerMode = false;
-
-  /* =============================
-     PAUL TARGET
-  ============================= */
+  let state = 0;
 
   paulTarget.addEventListener("targetFound", () => {
-    activatePower();
+    activateBase();
   });
 
   paulTarget.addEventListener("targetLost", () => {
-    deactivatePower();
+    resetAll();
   });
 
   document.body.addEventListener("click", () => {
-    powerMode = !powerMode;
-    powerMode ? activatePower() : deactivatePower();
+    state++;
+    if (state > 3) state = 1;
+    updateState();
   });
 
-  function activatePower() {
-    leftGlow.setAttribute("material", "opacity", 0.5);
-    rightGlow.setAttribute("material", "opacity", 0.5);
-    leftLight.setAttribute("intensity", 1);
-    rightLight.setAttribute("intensity", 1);
-    mist.setAttribute("material", "opacity", 0.15);
+  function activateBase() {
+    layer2.setAttribute("position", "0 0 0.12");
+    layer3.setAttribute("position", "0 0 0.2");
   }
 
-  function deactivatePower() {
+  function updateState() {
+
+    if (state === 1) {
+      leftGlow.setAttribute("material", "opacity", 0.4);
+      rightGlow.setAttribute("material", "opacity", 0.4);
+    }
+
+    if (state === 2) {
+      mist.setAttribute("material", "opacity", 0.15);
+      leftGlow.setAttribute("material", "opacity", 0.6);
+      rightGlow.setAttribute("material", "opacity", 0.6);
+      quote.setAttribute("opacity", 1);
+    }
+
+    if (state === 3) {
+      layer1.setAttribute("material", "color", "#c8a15a");
+      mist.setAttribute("material", "opacity", 0.25);
+      leftGlow.setAttribute("material", "opacity", 0.9);
+      rightGlow.setAttribute("material", "opacity", 0.9);
+    }
+
+  }
+
+  function resetAll() {
+    state = 0;
+
+    layer1.setAttribute("material", "color", "white");
+    layer2.setAttribute("position", "0 0 0.1");
+    layer3.setAttribute("position", "0 0 0.15");
+
     leftGlow.setAttribute("material", "opacity", 0);
     rightGlow.setAttribute("material", "opacity", 0);
-    leftLight.setAttribute("intensity", 0);
-    rightLight.setAttribute("intensity", 0);
     mist.setAttribute("material", "opacity", 0);
+    quote.setAttribute("opacity", 0);
   }
-
-  /* =============================
-     ENSEMBLE TARGET
-  ============================= */
-
-  ensembleTarget.addEventListener("targetFound", () => {
-    prophecyText.setAttribute("opacity", 1);
-  });
-
-  ensembleTarget.addEventListener("targetLost", () => {
-    prophecyText.setAttribute("opacity", 0);
-  });
-
-  /* =============================
-     LOGO TARGET
-  ============================= */
-
-  logoTarget.addEventListener("targetFound", () => {
-    fearText.setAttribute("opacity", 1);
-  });
-
-  logoTarget.addEventListener("targetLost", () => {
-    fearText.setAttribute("opacity", 0);
-  });
-
-  /* =============================
-     SANDWORM TARGET
-  ============================= */
-
-  wormTarget.addEventListener("targetFound", () => {
-    wormRing.setAttribute("opacity", 0.7);
-    wormRing.setAttribute("animation", {
-      property: "rotation",
-      to: "90 360 0",
-      loop: true,
-      dur: 4000,
-      easing: "linear"
-    });
-  });
-
-  wormTarget.addEventListener("targetLost", () => {
-    wormRing.setAttribute("opacity", 0);
-  });
 
 });
