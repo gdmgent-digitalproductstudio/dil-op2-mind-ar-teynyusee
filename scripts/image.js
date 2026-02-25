@@ -1,22 +1,30 @@
 document.addEventListener("DOMContentLoaded", () => {
 
+  // PAUL
   const paulTarget = document.querySelector("#paulTarget");
-
   const leftGlow = document.querySelector("#leftGlow");
   const rightGlow = document.querySelector("#rightGlow");
   const leftLight = document.querySelector("#leftLight");
   const rightLight = document.querySelector("#rightLight");
   const mist = document.querySelector("#mist");
 
+  // ENSEMBLE
+  const ensembleTarget = document.querySelector("#ensembleTarget");
   const prophecyText = document.querySelector("#prophecyText");
+
+  // LOGO
+  const logoTarget = document.querySelector("#logoTarget");
   const fearText = document.querySelector("#fearText");
+
+  // SANDWORM
+  const wormTarget = document.querySelector("#wormTarget");
   const wormRing = document.querySelector("#wormRing");
 
   let powerMode = false;
 
-  // =============================
-  // PAUL TARGET EVENTS
-  // =============================
+  /* =============================
+     PAUL TARGET
+  ============================= */
 
   paulTarget.addEventListener("targetFound", () => {
     activatePower();
@@ -47,38 +55,47 @@ document.addEventListener("DOMContentLoaded", () => {
     mist.setAttribute("material", "opacity", 0);
   }
 
-  // =============================
-  // ENSEMBLE TARGET
-  // =============================
+  /* =============================
+     ENSEMBLE TARGET
+  ============================= */
 
-  document.querySelectorAll('[mindar-image-target="targetIndex: 1"]')[0]
-    .addEventListener("targetFound", () => {
-      prophecyText.setAttribute("opacity", 1);
+  ensembleTarget.addEventListener("targetFound", () => {
+    prophecyText.setAttribute("opacity", 1);
+  });
+
+  ensembleTarget.addEventListener("targetLost", () => {
+    prophecyText.setAttribute("opacity", 0);
+  });
+
+  /* =============================
+     LOGO TARGET
+  ============================= */
+
+  logoTarget.addEventListener("targetFound", () => {
+    fearText.setAttribute("opacity", 1);
+  });
+
+  logoTarget.addEventListener("targetLost", () => {
+    fearText.setAttribute("opacity", 0);
+  });
+
+  /* =============================
+     SANDWORM TARGET
+  ============================= */
+
+  wormTarget.addEventListener("targetFound", () => {
+    wormRing.setAttribute("opacity", 0.7);
+    wormRing.setAttribute("animation", {
+      property: "rotation",
+      to: "90 360 0",
+      loop: true,
+      dur: 4000,
+      easing: "linear"
     });
+  });
 
-  // =============================
-  // LOGO TARGET
-  // =============================
-
-  document.querySelectorAll('[mindar-image-target="targetIndex: 2"]')[0]
-    .addEventListener("targetFound", () => {
-      fearText.setAttribute("opacity", 1);
-    });
-
-  // =============================
-  // SANDWORM TARGET
-  // =============================
-
-  document.querySelectorAll('[mindar-image-target="targetIndex: 3"]')[0]
-    .addEventListener("targetFound", () => {
-      wormRing.setAttribute("opacity", 0.7);
-      wormRing.setAttribute("animation", {
-        property: "rotation",
-        to: "90 360 0",
-        loop: true,
-        dur: 4000,
-        easing: "linear"
-      });
-    });
+  wormTarget.addEventListener("targetLost", () => {
+    wormRing.setAttribute("opacity", 0);
+  });
 
 });

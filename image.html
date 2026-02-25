@@ -2,7 +2,8 @@
 <html>
 <head>
   <meta charset="UTF-8" />
-  <title>Dune AR – Image Tracking</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dune AR – Scan</title>
 
   <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.2/dist/mindar-image-aframe.prod.js"></script>
@@ -10,7 +11,13 @@
   <link rel="stylesheet" href="css/main.css" />
 </head>
 
-<body>
+<body class="scan-page">
+
+<!-- UI OVERLAY -->
+<div class="scan-ui">
+  <a href="index.html" class="back-btn">← Back</a>
+  <div class="scan-text">Scan a Dune visual</div>
+</div>
 
 <a-scene
   mindar-image="imageTargetSrc: assets/targets.mind; autoStart: true; maxTrack: 1"
@@ -28,9 +35,8 @@
 
 <a-entity mindar-image-target="targetIndex: 0" id="paulTarget">
 
-  <!-- Mist layer -->
-  <a-plane 
-    id="mist"
+  <!-- Mist -->
+  <a-plane id="mist"
     position="0 0 0.08"
     width="1.2"
     height="1.6"
@@ -39,38 +45,22 @@
 
   <!-- LEFT EYE -->
   <a-entity position="-0.13 0.07 0.12">
-
     <a-circle id="leftGlow"
       radius="0.09"
       material="color: #00ccff; opacity: 0; transparent: true; shader: flat"
-      animation="property: scale; to: 1.2 1.2 1.2; dir: alternate; dur: 1000; loop: true">
+      animation="property: scale; to: 1.2 1.2 1.2; dir: alternate; dur: 900; loop: true">
     </a-circle>
-
-    <a-circle
-      radius="0.04"
-      material="color: #00ffff; opacity: 0; transparent: true; shader: flat">
-    </a-circle>
-
     <a-light id="leftLight" type="point" color="#00ccff" intensity="0" distance="1"></a-light>
-
   </a-entity>
 
   <!-- RIGHT EYE -->
   <a-entity position="0.13 0.07 0.12">
-
     <a-circle id="rightGlow"
       radius="0.09"
       material="color: #00ccff; opacity: 0; transparent: true; shader: flat"
-      animation="property: scale; to: 1.2 1.2 1.2; dir: alternate; dur: 1000; loop: true">
+      animation="property: scale; to: 1.2 1.2 1.2; dir: alternate; dur: 900; loop: true">
     </a-circle>
-
-    <a-circle
-      radius="0.04"
-      material="color: #00ffff; opacity: 0; transparent: true; shader: flat">
-    </a-circle>
-
     <a-light id="rightLight" type="point" color="#00ccff" intensity="0" distance="1"></a-light>
-
   </a-entity>
 
 </a-entity>
@@ -79,44 +69,36 @@
 <!-- TARGET 1 – ENSEMBLE -->
 <!-- ============================= -->
 
-<a-entity mindar-image-target="targetIndex: 1">
-
-  <a-text
+<a-entity mindar-image-target="targetIndex: 1" id="ensembleTarget">
+  <a-text id="prophecyText"
     value="THE PROPHECY AWAKENS"
     color="#e6d5a8"
     align="center"
     position="0 0.4 0.1"
-    opacity="0"
-    id="prophecyText">
+    opacity="0">
   </a-text>
-
 </a-entity>
 
 <!-- ============================= -->
 <!-- TARGET 2 – LOGO -->
 <!-- ============================= -->
 
-<a-entity mindar-image-target="targetIndex: 2">
-
-  <a-text
+<a-entity mindar-image-target="targetIndex: 2" id="logoTarget">
+  <a-text id="fearText"
     value="FEAR IS THE MIND-KILLER"
     color="#ffffff"
     align="center"
     position="0 0 0.1"
-    opacity="0"
-    id="fearText">
+    opacity="0">
   </a-text>
-
 </a-entity>
 
 <!-- ============================= -->
 <!-- TARGET 3 – SANDWORM -->
 <!-- ============================= -->
 
-<a-entity mindar-image-target="targetIndex: 3">
-
-  <a-ring
-    id="wormRing"
+<a-entity mindar-image-target="targetIndex: 3" id="wormTarget">
+  <a-ring id="wormRing"
     radius-inner="0.2"
     radius-outer="0.35"
     color="#c8a15a"
@@ -124,7 +106,6 @@
     rotation="90 0 0"
     opacity="0">
   </a-ring>
-
 </a-entity>
 
 </a-scene>
