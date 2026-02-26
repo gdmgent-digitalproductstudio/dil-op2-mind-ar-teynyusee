@@ -4,34 +4,53 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+<title>Spider-Verse AR - Face Mode</title>
+
 <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.2/dist/mindar-face-aframe.prod.js"></script>
+
+<link rel="stylesheet" href="css/main.css"/>
 
 <style>
 body{
   margin:0;
   overflow:hidden;
-  font-family:Arial, sans-serif;
+  background:black;
 }
 
 .tap-text{
   position:fixed;
-  bottom:40px;
+  bottom:35px;
   left:50%;
   transform:translateX(-50%);
-  padding:12px 24px;
-  background:rgba(0,0,0,0.7);
+  padding:10px 22px;
+  font-size:13px;
+  letter-spacing:0.5px;
+
+  background:rgba(0,0,0,0.6);
+  border:1px solid rgba(255,0,60,0.6);
   color:white;
   border-radius:40px;
+
+  backdrop-filter:blur(6px);
+  box-shadow:0 0 15px rgba(255,0,60,0.4);
+
   z-index:999;
+
+  animation: pulseHint 2s infinite alternate ease-in-out;
+}
+
+@keyframes pulseHint{
+  from{ opacity:0.7; }
+  to{ opacity:1; }
 }
 </style>
 </head>
 
 <body>
-  <a href="index.html" class="btn ghost" style="position:fixed; top:20px; left:20px; z-index:10;">
-← Back
-</a>
+
+<!-- PROPER BACK BUTTON -->
+<a href="index.html" class="back-btn">← BACK</a>
 
 <div class="tap-text">Tap screen to change mask</div>
 
@@ -39,25 +58,23 @@ body{
   mindar-face="smoothCount:10"
   vr-mode-ui="enabled:false"
   device-orientation-permission-ui="enabled:false"
+  renderer="colorManagement:true"
 >
-
-<a-camera position="0 0 0" look-controls="enabled:false"></a-camera>
 
   <a-assets>
     <img id="mask1" src="assets/mask1.png">
     <img id="mask3" src="assets/mask3.png">
   </a-assets>
 
-  <a-camera active="false"></a-camera>
+  <a-camera position="0 0 0" look-controls="enabled:false"></a-camera>
 
   <!-- FACE CENTER ANCHOR -->
-  <a-entity mindar-face-target="anchorIndex: 1">
+  <a-entity mindar-face-target="anchorIndex:1">
 
     <a-image
       id="faceMask"
       src="#mask1"
       position="0 0.2 0"
-      scale="1.6 1.9 1.1"
       material="transparent:true; shader:flat; depthTest:false">
     </a-image>
 

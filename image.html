@@ -4,6 +4,8 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
+<title>Spider-Verse AR - Image Mode</title>
+
 <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.2/dist/mindar-image-aframe.prod.js"></script>
 
@@ -20,8 +22,9 @@ body{
 
 <body>
 
-<a href="index.html" class="btn ghost" style="position:fixed; top:20px; left:20px; z-index:10;">
-← Back
+<!-- PROPER BACK BUTTON -->
+<a href="index.html" class="btn back-btn">
+  ← BACK
 </a>
 
 <a-scene
@@ -44,27 +47,17 @@ crossorigin="anonymous">
 </video>
 </a-assets>
 
-
 <a-camera position="0 0 0" look-controls="enabled:false"></a-camera>
 
-<!-- TARGET 0 PORTAL -->
+<!-- TARGET 0 -->
 <a-entity mindar-image-target="targetIndex:0">
-
-  <!-- PORTAL VIDEO (RONDE SHAPE + GEEN ZWARTE RANDEN) -->
   <a-entity
     geometry="primitive: circle; radius: 0.6"
     position="0 0 0"
-    material="
-      shader: flat;
-      src: #portalVideo;
-      transparent: true;
-      alphaTest: 0.1;
-      side: double;
-    "
+    material="shader: flat; src: #portalVideo; transparent: true; alphaTest: 0.1; side: double;"
     animation="property: scale; dir: alternate; dur: 2000; loop: true; to: 1.05 1.05 1">
   </a-entity>
 
-  <!-- SPIDER VOOR DE PORTAL (MEER DIEPTE) -->
   <a-image
     src="assets/spider-nobg.png"
     position="0 0.25 0.15"
@@ -72,126 +65,54 @@ crossorigin="anonymous">
     material="transparent:true"
     animation="property: position; dir: alternate; dur: 2200; loop: true; to: 0 0.35 0.15">
   </a-image>
-
 </a-entity>
 
-<!-- TARGET 1 MEME -->
+<!-- TARGET 1 -->
 <a-entity mindar-image-target="targetIndex:1">
-
   <a-image
     src="assets/three_spiders_meme.png"
     width="1.1"
     position="0 0 0.05"
-    animation__rotate="
-      property: rotation;
-      dir: alternate;
-      dur: 1800;
-      loop: true;
-      to: 0 0 5;"
-    animation__pulse="
-      property: scale;
-      dir: alternate;
-      dur: 1200;
-      loop: true;
-      to: 1.05 1.05 1;"
-    animation__float="
-      property: position;
-      dir: alternate;
-      dur: 2200;
-      loop: true;
-      to: 0 0.07 0.05;">
+    animation__rotate="property: rotation; dir: alternate; dur: 1800; loop: true; to: 0 0 5;"
+    animation__pulse="property: scale; dir: alternate; dur: 1200; loop: true; to: 1.05 1.05 1;"
+    animation__float="property: position; dir: alternate; dur: 2200; loop: true; to: 0 0.07 0.05;">
   </a-image>
-
 </a-entity>
 
-<!-- TARGET 2 GENT -->
+<!-- TARGET 2 -->
 <a-entity mindar-image-target="targetIndex:2">
-
   <a-entity
     position="0 -0.35 0"
     rotation="15 0 0"
     scale="0.8 0.8 0.8"
-
-    animation__jump="
-      property: position;
-      from: 0 -0.35 0;
-      to: 0 0.25 0.35;
-      dur: 800;
-      easing: easeOutBack"
-
-    animation__rotate="
-      property: rotation;
-      from: 15 0 0;
-      to: 0 0 0;
-      dur: 800;
-      easing: easeOutBack"
-
-    animation__scale="
-      property: scale;
-      from: 0.8 0.8 0.8;
-      to: 1 1 1;
-      dur: 800;
-      easing: easeOutBack"
-
-    animation__float="
-      property: position;
-      dir: alternate;
-      dur: 2000;
-      loop: true;
-      to: 0 0.30 0.35;
-      easing: easeInOutQuad">
+    animation__jump="property: position; from: 0 -0.35 0; to: 0 0.25 0.35; dur: 800; easing: easeOutBack"
+    animation__rotate="property: rotation; from: 15 0 0; to: 0 0 0; dur: 800; easing: easeOutBack"
+    animation__scale="property: scale; from: 0.8 0.8 0.8; to: 1 1 1; dur: 800; easing: easeOutBack"
+    animation__float="property: position; dir: alternate; dur: 2000; loop: true; to: 0 0.30 0.35; easing: easeInOutQuad">
 
     <a-image
       src="assets/spider-spring.png"
       width="0.9"
       material="shader: flat; transparent:true">
     </a-image>
-
   </a-entity>
-
 </a-entity>
 
-<!-- TARGET 3 LOGO -->
+<!-- TARGET 3 -->
 <a-entity mindar-image-target="targetIndex:3">
-
   <a-entity
     position="0 0 0"
     scale="0.5 0.5 0.5"
-
-    animation__forward="
-      property: position;
-      from: 0 0 0;
-      to: 0 0 0.6;
-      dur: 700;
-      easing: easeOutBack"
-
-    animation__scale="
-      property: scale;
-      from: 0.5 0.5 0.5;
-      to: 1 1 1;
-      dur: 700;
-      easing: easeOutBack"
-
-    animation__float="
-      property: position;
-      dir: alternate;
-      dur: 2000;
-      loop: true;
-      to: 0 0.05 0.65;
-      easing: easeInOutQuad">
+    animation__forward="property: position; from: 0 0 0; to: 0 0 0.6; dur: 700; easing: easeOutBack"
+    animation__scale="property: scale; from: 0.5 0.5 0.5; to: 1 1 1; dur: 700; easing: easeOutBack"
+    animation__float="property: position; dir: alternate; dur: 2000; loop: true; to: 0 0.05 0.65; easing: easeInOutQuad">
 
     <a-image
       src="assets/spider-logo.png"
       width="1.2"
-      material="
-        shader: flat;
-        transparent:true;
-        emissive:#ffffff;
-        emissiveIntensity:1.5;">
+      material="shader: flat; transparent:true; emissive:#ffffff; emissiveIntensity:1.5;">
     </a-image>
-
   </a-entity>
-
 </a-entity>
 
 </a-scene>
