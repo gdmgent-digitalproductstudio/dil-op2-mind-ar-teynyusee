@@ -49,7 +49,10 @@ body{
 
 <body>
 
-<!-- PROPER BACK BUTTON -->
+  <audio id="bg-music" autoplay loop>
+  <source src="assets/music.mp3" type="audio/mpeg">
+</audio>
+
 <a href="index.html" class="back-btn">← BACK</a>
 
 <div class="tap-text">Tap screen to change mask</div>
@@ -68,7 +71,6 @@ body{
 
   <a-camera position="0 0 0" look-controls="enabled:false"></a-camera>
 
-  <!-- FACE CENTER ANCHOR -->
   <a-entity mindar-face-target="anchorIndex:1">
 
     <a-image
