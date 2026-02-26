@@ -106,51 +106,86 @@ crossorigin="anonymous">
 <!-- TARGET 2 GENT -->
 <a-entity mindar-image-target="targetIndex:2">
 
-  <a-image
-    src="assets/spider-spring.png"
-    width="0.9"
-    position="0 -0.6 0.05"
-    animation__jumpup="
+  <a-entity
+    position="0 -0.35 0"
+    rotation="15 0 0"
+    scale="0.8 0.8 0.8"
+
+    animation__jump="
       property: position;
-      to: 0 0.35 0.05;
-      dur: 600;
-      easing: easeOutQuad;
-      startEvents: jump;
-    "
-    animation__jumpdown="
-      property: position;
-      to: 0 -0.6 0.05;
+      from: 0 -0.35 0;
+      to: 0 0.25 0.35;
       dur: 800;
-      easing: easeInQuad;
-      delay: 600;
-      startEvents: jump;
-    "
-    animation__loop="
+      easing: easeOutBack"
+
+    animation__rotate="
+      property: rotation;
+      from: 15 0 0;
+      to: 0 0 0;
+      dur: 800;
+      easing: easeOutBack"
+
+    animation__scale="
+      property: scale;
+      from: 0.8 0.8 0.8;
+      to: 1 1 1;
+      dur: 800;
+      easing: easeOutBack"
+
+    animation__float="
       property: position;
       dir: alternate;
-      dur: 1400;
+      dur: 2000;
       loop: true;
-      to: 0 0.35 0.05;
-      easing: easeInOutQuad;">
-  </a-image>
+      to: 0 0.30 0.35;
+      easing: easeInOutQuad">
+
+    <a-image
+      src="assets/spider-spring.png"
+      width="0.9"
+      material="shader: flat; transparent:true">
+    </a-image>
+
+  </a-entity>
 
 </a-entity>
 
 <!-- TARGET 3 LOGO -->
 <a-entity mindar-image-target="targetIndex:3">
 
-  <a-entity mindar-image-target="targetIndex:3">
-
   <a-entity
-    id="logoWrap"
-    position="0 0.1 0.05"
-    scale="0 0 0"
-    animation__pop="
+    position="0 -0.5 0.2"
+    rotation="0 0 -20"
+    scale="0.3 0.3 0.3"
+
+    animation__jump="
+      property: position;
+      from: 0 -0.5 0.2;
+      to: 0 0.15 0.05;
+      dur: 700;
+      easing: easeOutBack"
+      
+    animation__rotatein="
+      property: rotation;
+      from: 0 0 -20;
+      to: 0 0 0;
+      dur: 700;
+      easing: easeOutBack"
+
+    animation__scalein="
       property: scale;
+      from: 0.3 0.3 0.3;
       to: 1 1 1;
-      dur: 600;
-      easing: easeOutBack;
-      startEvents: targetFound">
+      dur: 700;
+      easing: easeOutBack"
+
+    animation__float="
+      property: position;
+      dir: alternate;
+      dur: 2000;
+      loop: true;
+      to: 0 0.22 0.05;
+      easing: easeInOutQuad">
 
     <a-image
       src="assets/three-spiders.png"
@@ -159,8 +194,6 @@ crossorigin="anonymous">
     </a-image>
 
   </a-entity>
-
-</a-entity>
 
 </a-entity>
 
