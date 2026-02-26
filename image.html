@@ -1,70 +1,112 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
 <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.2/dist/mindar-image-aframe.prod.js"></script>
 
-<link rel="stylesheet" href="css/main.css" />
+<link rel="stylesheet" href="css/main.css"/>
+
+<style>
+body{
+  margin:0;
+  overflow:hidden;
+  background:black;
+}
+</style>
 </head>
 
 <body>
 
-<a href="index.html" class="back-btn">← Back</a>
+<a href="index.html" class="btn ghost" style="position:fixed; top:20px; left:20px; z-index:10;">
+← Back
+</a>
 
 <a-scene
-mindar-image="imageTargetSrc: assets/targets.mind; maxTrack:1"
-color-space="sRGB"
-renderer="colorManagement:true"
+mindar-image="imageTargetSrc: assets/targets.mind; maxTrack:2;"
 vr-mode-ui="enabled:false"
 device-orientation-permission-ui="enabled:false"
+renderer="alpha:true"
+color-space="sRGB"
 >
 
 <a-assets>
-<img id="paulCutout" src="assets/paul.png">
+<video
+id="portalVideo"
+src="assets/target-0_video.mp4"
+loop
+muted
+playsinline
+webkit-playsinline
+crossorigin="anonymous">
+</video>
 </a-assets>
 
 <a-camera position="0 0 0" look-controls="enabled:false"></a-camera>
 
-<a-entity mindar-image-target="targetIndex:0" id="paulTarget">
+<!-- TARGET 0 PORTAL -->
+<a-entity mindar-image-target="targetIndex:0">
 
-<!-- BOX FRAME -->
-<a-box
-depth="0.02"
-height="1.7"
-width="1.2"
-position="0 0 0.02"
-material="color:#000000; opacity:0.25; transparent:true">
-</a-box>
+  <!-- PORTAL VIDEO (RONDE SHAPE + GEEN ZWARTE RANDEN) -->
+  <a-entity
+    geometry="primitive: circle; radius: 0.6"
+    position="0 0 0"
+    material="
+      shader: flat;
+      src: #portalVideo;
+      transparent: true;
+      alphaTest: 0.1;
+      side: double;
+    "
+    animation="property: scale; dir: alternate; dur: 2000; loop: true; to: 1.05 1.05 1">
+  </a-entity>
 
-<!-- BACK WALL -->
-<a-plane
+  <!-- SPIDER VOOR DE PORTAL (MEER DIEPTE) -->
+  <a-image
+    src="assets/spider-nobg.png"
+    position="0 0.25 0.15"
+    width="0.8"
+    material="transparent:true"
+    animation="property: position; dir: alternate; dur: 2200; loop: true; to: 0 0.35 0.15">
+  </a-image>
+
+</a-entity>
+
+<!-- TARGET 1 MEME -->
+<a-entity mindar-image-target="targetIndex:1">
+
+<a-image
+src="assets/three_spiders_meme.png"
+width="1.1"
 position="0 0 0.05"
-width="1.15"
-height="1.65"
-material="color:#2a2117">
-</a-plane>
+animation="property: rotation; to: 0 0 4; dur: 1200; dir: alternate; loop: true">
+</a-image>
 
-<!-- PAUL -->
-<a-plane
-id="paul"
-src="#paulCutout"
-position="0 0.02 0.18"
-width="1"
-height="1.5"
-material="transparent:true; alphaTest:0.5">
-</a-plane>
+</a-entity>
 
-<!-- FOREGROUND MIST -->
-<a-plane
-id="mist"
-position="0 0 0.3"
-width="1.2"
-height="1.8"
-material="color:#e6c98d; opacity:0; transparent:true">
-</a-plane>
+<!-- TARGET 2 GENT -->
+<a-entity mindar-image-target="targetIndex:2">
+
+<a-image
+src="assets/spider-spring.png"
+width="0.9"
+position="0 0.12 0.05"
+animation="property: position; dir: alternate; dur: 1400; loop: true; to: 0 0.25 0.05">
+</a-image>
+
+</a-entity>
+
+<!-- TARGET 3 LOGO -->
+<a-entity mindar-image-target="targetIndex:3">
+
+<a-image
+src="assets/three-spiders.png"
+width="1.1"
+position="0 0.1 0.05"
+animation="property: scale; from: 0.5 0.5 0.5; to: 1 1 1; dur: 900; easing: easeOutBack">
+</a-image>
 
 </a-entity>
 
