@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-  const masks = ["#mask1", "#mask2", "#mask3"];
+  const masks = ["#mask1", "#mask3"];
   let currentMask = 0;
 
   const faceMask = document.querySelector("#faceMask");
