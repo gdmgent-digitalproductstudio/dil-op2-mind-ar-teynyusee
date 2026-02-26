@@ -1,18 +1,16 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-  const ring = document.querySelector("#faceRing");
-  let active = false;
+  const masks = ["#mask1", "#mask2", "#mask3"];
+  let currentMask = 0;
 
+  const faceMask = document.querySelector("#faceMask");
+
+  if (!faceMask) return;
+
+  // Wissel masker bij klik / tap
   document.body.addEventListener("click", () => {
-
-    active = !active;
-
-    if (active) {
-      ring.setAttribute("color", "#ffcc66");
-    } else {
-      ring.setAttribute("color", "#00ccff");
-    }
-
+    currentMask = (currentMask + 1) % masks.length;
+    faceMask.setAttribute("src", masks[currentMask]);
   });
 
 });

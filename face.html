@@ -1,35 +1,72 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.2/dist/mindar-face-aframe.prod.js"></script>
+<script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.2/dist/mindar-face-aframe.prod.js"></script>
 
-  <link rel="stylesheet" href="css/main.css" />
+<style>
+body{
+  margin:0;
+  overflow:hidden;
+  font-family:Arial, sans-serif;
+}
+
+.tap-text{
+  position:fixed;
+  bottom:40px;
+  left:50%;
+  transform:translateX(-50%);
+  padding:12px 24px;
+  background:rgba(0,0,0,0.7);
+  color:white;
+  border-radius:40px;
+  z-index:999;
+}
+</style>
 </head>
 
 <body>
+  <a href="index.html" class="btn ghost" style="position:fixed; top:20px; left:20px; z-index:10;">
+← Back
+</a>
 
-<a href="index.html" class="back-btn">← Back</a>
+<div class="tap-text">Tap screen to change mask</div>
 
-<a-scene mindar-face vr-mode-ui="enabled: false">
+<a-scene
+  mindar-face="smoothCount:10"
+  vr-mode-ui="enabled:false"
+  device-orientation-permission-ui="enabled:false"
+>
 
-<a-camera active="false"></a-camera>
+<a-camera position="0 0 0" look-controls="enabled:false"></a-camera>
 
-<a-entity mindar-face-target="anchorIndex: 168">
+  <a-assets>
+    <img id="mask1" src="assets/mask1.png">
+    <img id="mask2" src="assets/mask2.png">
+    <img id="mask3" src="assets/mask3.png">
+  </a-assets>
 
-  <a-ring
-    radius-inner="0.45"
-    radius-outer="0.65"
-    color="#e6c98d"
-    animation="property: rotation; to: 0 0 360; loop: true; dur: 12000; easing: linear">
-  </a-ring>
+  <a-camera active="false"></a-camera>
 
-</a-entity>
+  <!-- FACE CENTER ANCHOR -->
+  <a-entity mindar-face-target="anchorIndex: 1">
+
+    <a-image
+      id="faceMask"
+      src="#mask1"
+      position="0 0 0"
+      scale="1.5 1.5 1.5"
+      material="transparent:true; shader:flat; depthTest:false">
+    </a-image>
+
+  </a-entity>
 
 </a-scene>
+
+<script src="scripts/face.js"></script>
 
 </body>
 </html>
