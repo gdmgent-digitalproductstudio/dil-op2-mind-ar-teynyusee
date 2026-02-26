@@ -44,6 +44,20 @@ crossorigin="anonymous">
 </video>
 </a-assets>
 
+<!-- CINEMATIC BLUR OVERLAY -->
+<a-plane
+  id="focusOverlay"
+  position="0 0 -0.5"
+  width="10"
+  height="10"
+  material="color:black; opacity:0; transparent:true"
+  animation__fadein="
+    property: material.opacity;
+    to: 0.55;
+    dur: 600;
+    easing: easeOutQuad">
+</a-plane>
+
 <a-camera position="0 0 0" look-controls="enabled:false"></a-camera>
 
 <!-- TARGET 0 PORTAL -->
@@ -154,27 +168,19 @@ crossorigin="anonymous">
 <a-entity mindar-image-target="targetIndex:3">
 
   <a-entity
-    position="0 -0.5 0.2"
-    rotation="0 0 -20"
-    scale="0.3 0.3 0.3"
+    position="0 0 0"
+    scale="0.5 0.5 0.5"
 
-    animation__jump="
+    animation__forward="
       property: position;
-      from: 0 -0.5 0.2;
-      to: 0 0.15 0.05;
-      dur: 700;
-      easing: easeOutBack"
-      
-    animation__rotatein="
-      property: rotation;
-      from: 0 0 -20;
-      to: 0 0 0;
+      from: 0 0 0;
+      to: 0 0 0.6;
       dur: 700;
       easing: easeOutBack"
 
-    animation__scalein="
+    animation__scale="
       property: scale;
-      from: 0.3 0.3 0.3;
+      from: 0.5 0.5 0.5;
       to: 1 1 1;
       dur: 700;
       easing: easeOutBack"
@@ -184,13 +190,17 @@ crossorigin="anonymous">
       dir: alternate;
       dur: 2000;
       loop: true;
-      to: 0 0.22 0.05;
+      to: 0 0.05 0.65;
       easing: easeInOutQuad">
 
     <a-image
-      src="assets/three-spiders.png"
-      width="1.1"
-      material="shader: flat; transparent:true">
+      src="assets/spider-logo.png"
+      width="1.2"
+      material="
+        shader: flat;
+        transparent:true;
+        emissive:#ffffff;
+        emissiveIntensity:1.5;">
     </a-image>
 
   </a-entity>
