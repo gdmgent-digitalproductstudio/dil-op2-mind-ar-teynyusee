@@ -47,6 +47,10 @@ body.home::after{
   padding:20px;
 }
 
+a {
+  text-decoration: none;
+}
+
 /* ===== LOGO ===== */
 .logo{
   width:240px;
@@ -56,6 +60,8 @@ body.home::after{
     drop-shadow(0 0 40px rgba(255,0,60,0.3));
   animation: floatLogo 3s ease-in-out infinite alternate;
 }
+
+a
 
 @keyframes floatLogo{
   from{ transform:translateY(-6px); }
